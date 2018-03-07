@@ -51,7 +51,7 @@ public class GameController {
     @GetMapping(value = "/game")
     public String gameView(@ModelAttribute("player") Player player, Model model) {
         model.addAttribute("funfact", ticTacToeService.getFunFact(FUNFACTURL));
-        model.addAttribute("comic_uri", "https://imgs.xkcd.com/comics/bad_code.png");
+        model.addAttribute("comic_uri", ticTacToeService.getComic(COMICURL));
         return "game";
     }
 

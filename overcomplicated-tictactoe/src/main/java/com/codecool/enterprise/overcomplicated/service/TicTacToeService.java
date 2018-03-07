@@ -45,14 +45,23 @@ public class TicTacToeService {
         }
     }*/
 
-    public String getFunFact(String funfactUrl){
+    public String getFunFact(String funfactURL){
         RestTemplate restTemplate = new RestTemplate();
         try {
-            return restTemplate.getForEntity(funfactUrl, String.class).getBody();
+            return restTemplate.getForEntity(funfactURL, String.class).getBody();
         } catch (RestClientException e) {
-            System.out.println("Fun fact service not available");
-            return "Fun fact service not available";
+            System.out.println("Fun fact service is not available");
+            return "Fun fact service is not available";
         }
     }
 
+    public Object getComic(String comicURL) {
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            return restTemplate.getForEntity(comicURL, String.class).getBody();
+        } catch (RestClientException e) {
+            System.out.println("Comic service is not available");
+            return "Comic service is not available";
+        }
+    }
 }
