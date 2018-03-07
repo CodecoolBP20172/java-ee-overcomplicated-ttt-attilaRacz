@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Random;
+
 @Controller
-@SessionAttributes({"player", "game"})
+@SessionAttributes({"player", "game", "avatar_uri"})
 public class GameController {
 
     @Autowired
@@ -31,12 +33,11 @@ public class GameController {
         return new TictactoeGame();
     }
 
-    //avatar in progress
-    /*@ModelAttribute("avatar_uri")
+    @ModelAttribute("avatar_uri")
     public String getAvatarUri(@ModelAttribute Player player) {
-        ticTacToeService.setPlayerAvatar(player, AVATARURL, false);
-        return player.getAvatarUrl();
-    }*/
+        ticTacToeService.setPlayerAvatar(player, AVATARURL);
+        return player.getAvatar();
+    }
 
     @GetMapping(value = "/")
     public String welcomeView(@ModelAttribute Player player) {

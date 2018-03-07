@@ -18,32 +18,15 @@ import java.util.stream.Collectors;
 @Service
 public class TicTacToeService {
 
-    private Random rand = new Random();
-
-    //avatar in progress
-    /*public void setPlayerAvatar(Player player, String avatarUrl, boolean overWrite) {
+    public void setPlayerAvatar(Player player, String avatarURL) {
         RestTemplate restTemplate = new RestTemplate();
         try {
-            ResponseEntity<String> response = restTemplate.getForEntity(avatarUrl, String.class);
-            if (overWrite) {
-                player.changeAvatar(response.getBody());
-            } else {
-                player.setEmptyAvatarUrl(response.getBody());
-            }
+            ResponseEntity<String> response = restTemplate.getForEntity(avatarURL, String.class);
+            player.setAvatar(response.getBody());
         } catch (RestClientException e) {
-            System.out.println("Avatar service unreachable");
+            System.out.println("Avatar service is not available");
         }
-    }*/
-
-    /*public Map<String, String> getComic(String comicUrl){
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            return objectMapper.readValue(new URL(comicUrl), HashMap.class);
-        } catch (IOException e) {
-            System.out.println("comic service unreachable");
-            return new HashMap<>();
-        }
-    }*/
+    }
 
     public String getFunFact(String funfactURL){
         RestTemplate restTemplate = new RestTemplate();
