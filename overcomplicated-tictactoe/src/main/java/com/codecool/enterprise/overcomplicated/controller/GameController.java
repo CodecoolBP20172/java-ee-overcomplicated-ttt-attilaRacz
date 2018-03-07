@@ -2,6 +2,8 @@ package com.codecool.enterprise.overcomplicated.controller;
 
 import com.codecool.enterprise.overcomplicated.model.Player;
 import com.codecool.enterprise.overcomplicated.model.TictactoeGame;
+import com.codecool.enterprise.overcomplicated.service.TicTacToeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +11,15 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @SessionAttributes({"player", "game"})
 public class GameController {
+
+    @Autowired
+    private TicTacToeService ticTacToeService;
+
+    private static final String AVATARURL = "http://localhost:60001/getavatar";
+
+    private static final String COMICURL = "http://localhost:60002/getcomic";
+
+    private static final String FUNFACTURL = "http://localhost:60003/getfunfact";
 
     @ModelAttribute("player")
     public Player getPlayer() {
@@ -20,10 +31,12 @@ public class GameController {
         return new TictactoeGame();
     }
 
-    @ModelAttribute("avatar_uri")
-    public String getAvatarUri() {
-        return "https://robohash.org/codecool";
-    }
+    //avatar in progress
+    /*@ModelAttribute("avatar_uri")
+    public String getAvatarUri(@ModelAttribute Player player) {
+        ticTacToeService.setPlayerAvatar(player, AVATARURL, false);
+        return player.getAvatarUrl();
+    }*/
 
     @GetMapping(value = "/")
     public String welcomeView(@ModelAttribute Player player) {
@@ -37,7 +50,7 @@ public class GameController {
 
     @GetMapping(value = "/game")
     public String gameView(@ModelAttribute("player") Player player, Model model) {
-        model.addAttribute("funfact", "&quot;Chuck Norris knows the last digit of pi.&quot;");
+        model.addAttribute("funfact", ticTacToeService.getFunFact(FUNFACTURL));
         model.addAttribute("comic_uri", "https://imgs.xkcd.com/comics/bad_code.png");
         return "game";
     }
