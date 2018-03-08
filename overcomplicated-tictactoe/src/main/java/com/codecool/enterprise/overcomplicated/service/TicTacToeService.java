@@ -51,9 +51,6 @@ public class TicTacToeService {
         tictactoeGame.saveMove(move, ai);
     }
 
-
-
-
     public int getAiMove(String aiURL){
         RestTemplate restTemplate = new RestTemplate();
         try {
