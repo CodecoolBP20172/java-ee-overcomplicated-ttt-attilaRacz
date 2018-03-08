@@ -15,6 +15,10 @@ public class TictactoeGame {
         return gameState;
     }
 
+    public void emptyGameState() {
+        this.gameState = new char[9];
+    }
+
     public boolean isGameOver() {
         return gameOver;
     }

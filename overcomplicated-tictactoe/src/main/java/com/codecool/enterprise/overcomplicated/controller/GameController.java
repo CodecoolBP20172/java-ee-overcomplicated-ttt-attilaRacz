@@ -68,4 +68,13 @@ public class GameController {
         ticTacToeService.winCheck();
         return "redirect:/game";
     }
+
+    @GetMapping(value = "/game-new")
+    public String emptyGameStatus(@ModelAttribute("player") Player player, Model model) {
+        ticTacToeService.getGame().emptyGameState();
+        ticTacToeService.getGame().setGameOver(false);
+        model.addAttribute("funfact", ticTacToeService.getFunFact(FUNFACTURL));
+        model.addAttribute("comic_uri", ticTacToeService.getComic(COMICURL));
+        return "game";
+    }
 }
