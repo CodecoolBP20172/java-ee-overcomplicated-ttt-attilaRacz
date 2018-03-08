@@ -66,4 +66,28 @@ public class TicTacToeService {
         return tictactoeGame;
     }
 
+    public void winCheck() {
+        if (!getGame().isGameOver()) {
+            char zero = getGame().gameStateToString().charAt(0);
+            char one = getGame().gameStateToString().charAt(1);
+            char two = getGame().gameStateToString().charAt(2);
+            char three = getGame().gameStateToString().charAt(3);
+            char four = getGame().gameStateToString().charAt(4);
+            char five = getGame().gameStateToString().charAt(5);
+            char six = getGame().gameStateToString().charAt(6);
+            char seven = getGame().gameStateToString().charAt(7);
+            char eight = getGame().gameStateToString().charAt(8);
+            if ((zero != '-' && zero == one && zero == two) ||
+                    (zero != '-' && zero == three && zero == six) ||
+                    (zero != '-' && zero == four && zero == eight) ||
+                    (one != '-' && one == four && one == seven) ||
+                    (two != '-' && two == five && two == eight) ||
+                    (three != '-' && three == four && three == five) ||
+                    (six != '-' && six == seven && six == eight) ||
+                    (two != '-' && two == four && two == six)) {
+                getGame().setGameOver(true);
+                System.out.println("game over: " + getGame().isGameOver());
+            }
+        }
+    }
 }

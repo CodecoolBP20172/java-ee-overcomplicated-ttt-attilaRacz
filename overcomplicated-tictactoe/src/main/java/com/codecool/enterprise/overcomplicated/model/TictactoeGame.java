@@ -9,8 +9,18 @@ public class TictactoeGame {
 
     private char symbol = 'X';
 
+    private boolean gameOver = false;
+
     public char[] getGameState() {
         return gameState;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
     }
 
     public void saveMove(int move, boolean ai) {

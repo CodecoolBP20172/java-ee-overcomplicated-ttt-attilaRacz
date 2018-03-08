@@ -65,6 +65,7 @@ public class GameController {
         if (ticTacToeService.getGame().gameStateToString().contains("-")) {
             ticTacToeService.processMove(ticTacToeService.getAiMove(aiURL), true);
         }
+        ticTacToeService.winCheck();
         return "redirect:/game";
     }
 }
