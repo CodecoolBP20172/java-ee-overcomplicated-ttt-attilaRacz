@@ -30,7 +30,7 @@ public class GameController {
 
     @ModelAttribute("game")
     public TictactoeGame getGame() {
-        return new TictactoeGame();
+        return ticTacToeService.getGame();
     }
 
     @ModelAttribute("avatar_uri")
@@ -59,6 +59,8 @@ public class GameController {
     @GetMapping(value = "/game-move")
     public String gameMove(@ModelAttribute("player") Player player, @ModelAttribute("move") int move) {
         System.out.println("Player moved " + move);
+        ticTacToeService.processMove(move);
+        ticTacToeService.displayMove();
         return "redirect:/game";
     }
 }
