@@ -17,8 +17,6 @@
             <div class="media-body">
                 <h1 class="media-heading">The coolest TicTacToe in the World</h1>
                 <p>OK, just a bit overcomplicated...</p>
-                <h2 th:if="${game.isGameOver()}">Game Over!</h2>
-                <a href="/game-new" class="btn btn-default" th:if="${game.isGameOver()}">Start a new game!</a>
             </div>
             <div class="media-right">
                 <span class="media-heading" th:text="${player.userName}"/>
@@ -46,7 +44,13 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+            <div class="col-xs-12 col-sm-3">
+                <div>
+                    <h2 th:if="${game.isGameOver()}">Game Over!</h2>
+                    <a href="/game-new" class="btn btn-default" th:if="${game.isGameOver()}">Start a new game!</a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
                 <div class="container-fluid game-container">
                     <div class="row">
                         <div class="col-xs-4">
