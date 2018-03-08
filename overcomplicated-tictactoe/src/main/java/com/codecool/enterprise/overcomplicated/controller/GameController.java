@@ -58,9 +58,13 @@ public class GameController {
 
     @GetMapping(value = "/game-move")
     public String gameMove(@ModelAttribute("player") Player player, @ModelAttribute("move") int move) {
-        System.out.println("Player moved " + move);
-        ticTacToeService.processMove(move);
-        ticTacToeService.displayMove();
+        ticTacToeService.processMove(move, false);
+        String gameState = ticTacToeService.getGame().gameStateToString();
+        char playerSymbol = ticTacToeService.getGame().getSymbol();
+        String aiURL = String.format("http://tttapi.herokuapp.com/api/v1/%s/%s", gameState, playerSymbol);
+        if (ticTacToeService.getGame().gameStateToString().contains("-")) {
+            ticTacToeService.processMove(ticTacToeService.getAiMove(aiURL), true);
+        }
         return "redirect:/game";
     }
 }

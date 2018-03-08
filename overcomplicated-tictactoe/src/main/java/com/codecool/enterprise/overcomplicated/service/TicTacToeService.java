@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+
 @Service
 public class TicTacToeService {
 
@@ -45,16 +47,26 @@ public class TicTacToeService {
         }
     }
 
-    public void processMove(int move) {
-        tictactoeGame.saveMove(move);
-        System.out.println("gamestate: " + tictactoeGame.gameStateToString());
+    public void processMove(int move, boolean ai) {
+        tictactoeGame.saveMove(move, ai);
     }
 
-    public void displayMove() {
 
+
+
+    public int getAiMove(String aiURL){
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            return Character.getNumericValue(restTemplate.getForEntity(aiURL, String.class).getBody().charAt(50));
+            //return restTemplate.getForEntity(aiURL, String.class).getBody();
+        } catch (RestClientException e) {
+            System.out.println("Ai service is not available");
+            throw new IllegalArgumentException("Couldn't find the next move of the AI.");
+        }
     }
 
     public TictactoeGame getGame() {
         return tictactoeGame;
     }
+
 }
